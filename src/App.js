@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from 'react';
+import NavBar from './components/NavBar';
+import News from './components/News';
+import './App.css'; 
 function App() {
+  const [apiUrl, setApiUrl] = useState("https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=in&max=10&apikey=0f242ff4e67b3a734d117843614de000");
+
+  const handleUrlChange = (newUrl) => {
+    setApiUrl(newUrl);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container" >
+      <NavBar onUrlChange={handleUrlChange}  />
+      <News key={apiUrl} ApiUrl={apiUrl} />
+      
     </div>
   );
 }
